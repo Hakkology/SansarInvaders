@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e50d52a9136b4e408e170cc2cd32d4c, type: 3}
   m_Name: SansarGridDataV1
   m_EditorClassIdentifier: 
-  sansarPrefab: []
+  sansarPrefab:
+  - {fileID: 784585302055401146, guid: c6bd7b90af9899c40b5df68f1cd11c0b, type: 3}
+  - {fileID: 784585302055401146, guid: c6bd7b90af9899c40b5df68f1cd11c0b, type: 3}
+  - {fileID: 8588068292545421460, guid: 6efeded3203a6c841b98447f3169c296, type: 3}
+  - {fileID: 8588068292545421460, guid: 6efeded3203a6c841b98447f3169c296, type: 3}
+  - {fileID: 1889497119216740065, guid: b9e3129f36fb9994ba5fa6c70e6e660d, type: 3}
   rows: 5
   columns: 11
   satirAraligi: 2.5

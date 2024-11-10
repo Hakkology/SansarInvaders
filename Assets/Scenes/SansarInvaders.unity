@@ -153,6 +153,7 @@ Transform:
   m_Children:
   - {fileID: 1408581289}
   - {fileID: 1497601034}
+  - {fileID: 1471149643}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -623,19 +624,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f22f867da464c54bbfd5c1f556e1af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sansarPrefab:
-  - {fileID: 1889497119216740065, guid: b9e3129f36fb9994ba5fa6c70e6e660d, type: 3}
-  - {fileID: 8588068292545421460, guid: 6efeded3203a6c841b98447f3169c296, type: 3}
-  - {fileID: 8588068292545421460, guid: 6efeded3203a6c841b98447f3169c296, type: 3}
-  - {fileID: 784585302055401146, guid: c6bd7b90af9899c40b5df68f1cd11c0b, type: 3}
-  - {fileID: 784585302055401146, guid: c6bd7b90af9899c40b5df68f1cd11c0b, type: 3}
-  rows: 5
-  columns: 11
-  satirAraligi: 2
-  sutunAraligi: 1.5
-  yOffset: 3
-  minSpeed: 0.5
-  maxSpeed: 3
+  sansarGridDataList:
+  - {fileID: 11400000, guid: e7afba688c8cb5b4e916958b9891e6bd, type: 2}
+  - {fileID: 11400000, guid: 9e1bd0fbd1d2d5b45b34360414091bfd, type: 2}
+  currentLevel: 1
   SansarRoketi: {fileID: 4867830796599015651, guid: 543a02358e5cb3844b5ce737755b0ca7, type: 3}
   SansarAtakHizi: 1
 --- !u!4 &913066736
@@ -956,6 +948,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.625, y: 2}
   m_EdgeRadius: 0
+--- !u!1 &1471149642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471149643}
+  - component: {fileID: 1471149644}
+  m_Layer: 0
+  m_Name: SpecialMissilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1471149643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471149642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180989645}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1471149644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471149642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61967a4e47ea2754383276ef638dc73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4867830796599015651, guid: 543a02358e5cb3844b5ce737755b0ca7, type: 3}
+  havuzBoyutu: 5
 --- !u!1 &1497601033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1083,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1800060132}
   - component: {fileID: 1800060131}
-  m_Layer: 0
+  - component: {fileID: 1800060134}
+  - component: {fileID: 1800060133}
+  m_Layer: 8
   m_Name: MysteryShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,13 +1152,55 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800060130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12, z: 0}
+  m_LocalPosition: {x: -18.7, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1800060133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800060130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7adb6ba73db78341abb8eb73fcd99ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sansarData: {fileID: 11400000, guid: 086d07a4c23d6554bb77c428e7c26f53, type: 2}
+  hiz: 5
+  atakHizi: 2
+  spawnHizi: 10
+--- !u!61 &1800060134
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800060130}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 1}
+    newSize: {x: 0.32, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2064840992
 GameObject:
   m_ObjectHideFlags: 0

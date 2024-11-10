@@ -1,27 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SansarGrid : MonoBehaviour
 {
     [Header("Invader grid iþlemleri")]
-    public Sansar[] sansarPrefab;
-    public int rows = 5;
-    public int columns = 11;
-    public float satirAraligi = 2.0f;
-    public float sutunAraligi = 1.5f;
-    public float yOffset = 3f;
+    public List<SansarGridSO> sansarGridDataList = new List<SansarGridSO>();
+    public int currentLevel = 0;
+    //public SansarGridSO sansarGridData;
 
     private Vector3 _direction = Vector3.right;
     private float speed;
-    [Header("Invader zorluk iþlemleri")]
-    public float minSpeed = .5f;
-    public float maxSpeed = 2f;
 
     [Header("Sansar roket mantýðý")]
     public Projectile SansarRoketi;
     public float SansarAtakHizi;
 
     public int OlenSansarlarSayisi { get; private set; }
-    public int SansarSayisi => rows * columns;
+    public int SansarSayisi => sansarGridDataList[currentLevel].rows * sansarGridDataList[currentLevel].columns;
     public int CanliSansarSayisi => SansarSayisi - OlenSansarlarSayisi;
     public float SansarYuzdesi => (float)OlenSansarlarSayisi / (float)SansarSayisi;
 
@@ -32,20 +27,20 @@ public class SansarGrid : MonoBehaviour
 
     public void SansarlariDiz()
     {
-        for (int satir = 0; satir < rows; satir++)
+        for (int satir = 0; satir < sansarGridDataList[currentLevel].rows; satir++)
         {
-            float width = satirAraligi * (columns - 1);
-            float height = sutunAraligi * (rows - 1);
+            float width = sansarGridDataList[currentLevel].satirAraligi * (sansarGridDataList[currentLevel].columns - 1);
+            float height = sansarGridDataList[currentLevel].sutunAraligi * (sansarGridDataList[currentLevel].rows - 1);
 
             //Vector2 merkezilestirme = new Vector2(-width/2, -height/2);
 
-            Vector3 satirKonumu = new Vector3(-width / 2, satir * sutunAraligi, -height / 2);
+            Vector3 satirKonumu = new Vector3(-width / 2, satir * sansarGridDataList[currentLevel].sutunAraligi, -height / 2);
 
-            for (int sutun = 0; sutun < columns; sutun++)
+            for (int sutun = 0; sutun < sansarGridDataList[currentLevel].columns; sutun++)
             {
-                Sansar sansar = Instantiate(sansarPrefab[satir], transform);
+                Sansar sansar = Instantiate(sansarGridDataList[currentLevel].sansarPrefab[satir], transform);
                 Vector3 konum = satirKonumu;
-                konum.x += sutun * satirAraligi;
+                konum.x += sutun * sansarGridDataList[currentLevel].satirAraligi;
                 sansar.transform.position = konum;
                 sansar._killed += OnSansarKilled;
             }
@@ -59,7 +54,7 @@ public class SansarGrid : MonoBehaviour
 
     private void Update()
     {
-        speed = Mathf.Lerp(minSpeed, maxSpeed, SansarYuzdesi);
+        speed = Mathf.Lerp(sansarGridDataList[currentLevel].minSpeed, sansarGridDataList[currentLevel].maxSpeed, SansarYuzdesi);
         transform.position += _direction * speed * Time.deltaTime;
 
         Vector3 solKenar = Camera.main.ViewportToWorldPoint(Vector3.zero);
@@ -168,6 +163,18 @@ public class SansarGrid : MonoBehaviour
         foreach (Transform sansar in transform)
         {
             Destroy(sansar.gameObject);
+        }
+
+        SansarlariDiz();
+    }
+
+    public void SansarLevelAtla()
+    {
+        currentLevel++;
+
+        if (currentLevel > sansarGridDataList.Count)
+        {
+            currentLevel = 0;
         }
 
         SansarlariDiz();
