@@ -5,7 +5,8 @@ public class Projectile : MonoBehaviour
 {
     public Vector3 direction;
     public float speed;
-    public Action destroyed;
+    public Action<Projectile> destroyed;
+
 
     void Update()
     {
@@ -14,7 +15,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        destroyed.Invoke();
-        Destroy(gameObject);
+        destroyed.Invoke(this);
+        //ProjectilePool.Instance.HavuzaDonder(this);
     }
 }

@@ -7,7 +7,6 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public float speed = 5;
     public Projectile _laserPrefab;
-    private bool _laserActive;
 
     void Update()
     {
@@ -28,17 +27,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Shoot()
     {
-        if (!_laserActive)
+        Projectile laser = ProjectilePool.Instance.HavuzdanAl();
+        if (laser != null)
         {
-            Projectile laser = Instantiate(_laserPrefab, transform.position, Quaternion.identity);
-            laser.destroyed += LaserReset;
-            _laserActive = true;
+            laser.transform.position = transform.position;
         }
-
-    }
-
-    private void LaserReset()
-    {
-        _laserActive = false;
     }
 }

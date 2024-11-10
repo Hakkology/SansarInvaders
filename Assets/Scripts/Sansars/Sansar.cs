@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Sansar : MonoBehaviour
@@ -9,6 +8,8 @@ public class Sansar : MonoBehaviour
     // Referanslar
     private SpriteRenderer _spriteRenderer;
     private int _animasyonKaresi;
+
+    public Action _killed;
 
     private void Awake()
     {
@@ -29,5 +30,14 @@ public class Sansar : MonoBehaviour
         }
 
         _spriteRenderer.sprite = sansarData.animasyonSprites[_animasyonKaresi];
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Laser"))
+        {
+            _killed.Invoke();
+            gameObject.SetActive(false);
+        }
     }
 }

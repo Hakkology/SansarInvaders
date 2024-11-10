@@ -2,18 +2,28 @@ using UnityEngine;
 
 public class SansarGrid : MonoBehaviour
 {
+    [Header("Invader grid iþlemleri")]
     public Sansar[] sansarPrefab;
     public int rows = 5;
     public int columns = 11;
-
     public float satirAraligi = 2.0f;
     public float sutunAraligi = 1.5f;
     public float yOffset = 3f;
 
     private Vector3 _direction = Vector3.right;
-    private float speed = 2.0f;
+    private float speed;
+    [Header("Invader zorluk iþlemleri")]
     public float minSpeed = .5f;
     public float maxSpeed = 2f;
+
+    [Header("Sansar roket mantýðý")]
+    public Projectile SansarRoketi;
+    public float SansarAtakHizi;
+
+    public int OlenSansarlarSayisi { get; private set; }
+    public int SansarSayisi => rows * columns;
+    public int CanliSansarSayisi => SansarSayisi - OlenSansarlarSayisi;
+    public float SansarYuzdesi => (float)OlenSansarlarSayisi / (float)SansarSayisi;
 
     private void Awake()
     {
@@ -32,15 +42,19 @@ public class SansarGrid : MonoBehaviour
                 Vector3 konum = satirKonumu;
                 konum.x += sutun * satirAraligi;
                 sansar.transform.position = konum;
+                sansar._killed += OnSansarKilled;
             }
         }
     }
 
+    private void Start()
+    {
+        InvokeRepeating(nameof(MissileAttack), SansarAtakHizi, SansarAtakHizi);
+    }
+
     private void Update()
     {
-        //speed = .6f * (speed - minSpeed) / (maxSpeed - minSpeed);
-        //speed = Mathf.Lerp(minSpeed, maxSpeed, speed);
-
+        speed = Mathf.Lerp(minSpeed, maxSpeed, SansarYuzdesi);
         transform.position += _direction * speed * Time.deltaTime;
 
         Vector3 solKenar = Camera.main.ViewportToWorldPoint(Vector3.zero);
@@ -110,5 +124,31 @@ public class SansarGrid : MonoBehaviour
             }
         }
         return sag;
+    }
+
+    private void MissileAttack()
+    {
+        foreach (Transform sansar in transform)
+        {
+            if (!sansar.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+            if (Random.value < (1.0f / (float)CanliSansarSayisi))
+            {
+                Projectile missile = Instantiate(SansarRoketi, sansar.position, Quaternion.identity);
+                missile.destroyed += OnMissileCrash;
+            }
+        }
+    }
+
+    private void OnSansarKilled()
+    {
+        OlenSansarlarSayisi++;
+    }
+
+    private void OnMissileCrash(Projectile projectile)
+    {
+        Destroy(projectile.gameObject);
     }
 }
