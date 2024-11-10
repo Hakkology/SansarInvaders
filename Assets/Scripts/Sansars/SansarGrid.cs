@@ -27,6 +27,11 @@ public class SansarGrid : MonoBehaviour
 
     private void Awake()
     {
+        SansarlariDiz();
+    }
+
+    public void SansarlariDiz()
+    {
         for (int satir = 0; satir < rows; satir++)
         {
             float width = satirAraligi * (columns - 1);
@@ -34,7 +39,7 @@ public class SansarGrid : MonoBehaviour
 
             //Vector2 merkezilestirme = new Vector2(-width/2, -height/2);
 
-            Vector3 satirKonumu = new Vector3(-width/2, satir * sutunAraligi, -height/2);
+            Vector3 satirKonumu = new Vector3(-width / 2, satir * sutunAraligi, -height / 2);
 
             for (int sutun = 0; sutun < columns; sutun++)
             {
@@ -136,8 +141,14 @@ public class SansarGrid : MonoBehaviour
             }
             if (Random.value < (1.0f / (float)CanliSansarSayisi))
             {
-                Projectile missile = Instantiate(SansarRoketi, sansar.position, Quaternion.identity);
-                missile.destroyed += OnMissileCrash;
+                Projectile missile = MissilePool.Instance.HavuzdanAl();
+                if (missile != null)
+                {
+                    missile.transform.position = sansar.position;
+                    missile.gameObject.SetActive(true);
+                    missile.destroyed += OnMissileCrash;
+                }
+                //break;
             }
         }
     }
@@ -149,6 +160,16 @@ public class SansarGrid : MonoBehaviour
 
     private void OnMissileCrash(Projectile projectile)
     {
-        Destroy(projectile.gameObject);
+        MissilePool.Instance.HavuzaDonder(projectile);
+    }
+
+    public void SansarlariTekrarDiz()
+    {
+        foreach (Transform sansar in transform)
+        {
+            Destroy(sansar.gameObject);
+        }
+
+        SansarlariDiz();
     }
 }

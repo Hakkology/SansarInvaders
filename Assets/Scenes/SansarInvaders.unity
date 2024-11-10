@@ -152,6 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1408581289}
+  - {fileID: 1497601034}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -313,6 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   _laserPrefab: {fileID: 1484103225129868352, guid: 17fae0c5020f8884b83c37b78474013a, type: 3}
+  SansarGrid: {fileID: 913066735}
 --- !u!61 &490341550
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -838,10 +840,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1408581288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dc0bd8717335149894d3c8c707d06f, type: 3}
+  m_Script: {fileID: 11500000, guid: 571800950034a8345acad660d46bc8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 1484103225129868352, guid: 17fae0c5020f8884b83c37b78474013a, type: 3}
+  projectilePrefab: {fileID: 1484103225129868352, guid: 17fae0c5020f8884b83c37b78474013a, type: 3}
   havuzBoyutu: 3
 --- !u!1 &1444700751
 GameObject:
@@ -954,6 +956,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.625, y: 2}
   m_EdgeRadius: 0
+--- !u!1 &1497601033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1497601034}
+  - component: {fileID: 1497601035}
+  m_Layer: 0
+  m_Name: MissilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1497601034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497601033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180989645}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497601035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497601033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5224a6694a0e954cb37be2c1db9f8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4867830796599015651, guid: 543a02358e5cb3844b5ce737755b0ca7, type: 3}
+  havuzBoyutu: 5
 --- !u!1 &1796884248
 GameObject:
   m_ObjectHideFlags: 0

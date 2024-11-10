@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectilePool : MonoBehaviour
+public abstract class ProjectilePool : MonoBehaviour
 {
-    public static ProjectilePool Instance { get; private set; }
-    public Projectile laserPrefab;
+    //public static ProjectilePool Instance { get; private set; }
+    public Projectile projectilePrefab;
     public int havuzBoyutu = 3;
 
-    private Queue<Projectile> _pool;
-    private void Awake()
+    protected Queue<Projectile> _pool;
+    protected virtual void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        //if (Instance == null)
+        //    Instance = this;
+        //else
+        //    Destroy(gameObject);
 
         HavuzuBaslat();
     }
@@ -26,7 +26,7 @@ public class ProjectilePool : MonoBehaviour
 
         for (int i = 0; i < havuzBoyutu; i++)
         {
-            Projectile projectile = Instantiate(laserPrefab, transform);
+            Projectile projectile = Instantiate(projectilePrefab, transform);
             projectile.gameObject.SetActive(false);
             projectile.destroyed += HavuzaDonder;
             _pool.Enqueue(projectile);
@@ -42,7 +42,6 @@ public class ProjectilePool : MonoBehaviour
             return projectile; 
         }
 
-        Debug.Log("Havuz boþ kardeþim iþine git");
         return null;
     }
     public void HavuzaDonder(Projectile projectile)
@@ -50,4 +49,5 @@ public class ProjectilePool : MonoBehaviour
         projectile.gameObject.SetActive(false);
         _pool.Enqueue(projectile);
     }
+
 }

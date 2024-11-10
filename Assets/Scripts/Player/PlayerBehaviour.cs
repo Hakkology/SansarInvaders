@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public float speed = 5;
     public Projectile _laserPrefab;
+    public SansarGrid SansarGrid;
 
     void Update()
     {
@@ -27,10 +28,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Shoot()
     {
-        Projectile laser = ProjectilePool.Instance.HavuzdanAl();
+        Projectile laser = LaserPool.Instance.HavuzdanAl();
         if (laser != null)
         {
             laser.transform.position = transform.position;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") ||
+            collision.gameObject.layer == LayerMask.NameToLayer("Missile"))
+        {
+            SansarGrid.SansarlariTekrarDiz();
         }
     }
 }
