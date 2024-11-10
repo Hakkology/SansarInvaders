@@ -160,6 +160,7 @@ public class SansarGrid : MonoBehaviour
 
     public void SansarlariTekrarDiz()
     {
+        currentLevel = 0;
         foreach (Transform sansar in transform)
         {
             Destroy(sansar.gameObject);

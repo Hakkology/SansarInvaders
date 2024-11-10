@@ -40,7 +40,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Missile"))
         {
-            SansarGrid.SansarlariTekrarDiz();
+            GameState.Instance.ReduceHealth();
+            //GameState.Instance.ResetBoard();
         }
     }
 }

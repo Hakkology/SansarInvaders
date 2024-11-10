@@ -37,6 +37,7 @@ public class Sansar : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
             _killed.Invoke();
+            GameState.Instance.AddScore(sansarData.Skor);
             gameObject.SetActive(false);
         }
     }

@@ -7,4 +7,5 @@ public class SansarSO : ScriptableObject
 {
     public Sprite[] animasyonSprites;
     public float animasyonSuresi = 1.0f;
+    public int Skor = 10;
 }
